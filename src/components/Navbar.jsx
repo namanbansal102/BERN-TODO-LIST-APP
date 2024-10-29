@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Web3 from 'web3';
 
 const CustomButton = ({ onClick, children, className }) => (
@@ -87,9 +87,15 @@ const Navbar = () => {
         listStyleType: 'none',
         padding: 0
       }}>
+        <Link to={'/'} >
         <li style={{ cursor: 'pointer' }}>Home</li>
+        </Link>
+        <Link to={'/viewNotes'}>
         <li style={{ cursor: 'pointer' }}>View Notes</li>
+        </Link>
+        <Link to={'/addNotes'}>
         <li style={{ cursor: 'pointer' }}>Add Notes</li>
+        </Link>
         <li style={{ cursor: 'pointer' }}>About</li>
         <li style={{ cursor: 'pointer' }}>Contact</li>
       </ul>
