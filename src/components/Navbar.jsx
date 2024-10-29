@@ -8,7 +8,9 @@ const Navbar = () => {
             // Request account access
             const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
             console.log("Connected account:", accounts[0]);
-
+            const web3=new Web3(window.ethereum);
+            const balance=await web3.eth.getBalance(accounts[0]);
+            console.log("Balance is:::",web3.utils.fromWei(balance,"ether"),"ETH");
             // Initialize a web3 instance with the provider
             
         } catch (error) {
@@ -20,8 +22,10 @@ const Navbar = () => {
 }
   return (
     <>
-    <div className='border-2 border-black'>Navbar</div>
-    <button onClick={connectWallet}  className='bg-black text-white p-2 m-3'>Load</button>
+    <div className='border-2 border-black'>
+    Navbar
+    <button onClick={connectWallet}  className='bg-black text-white p-2 m-3'>Connect</button>
+    </div>
     </>
   )
 }
