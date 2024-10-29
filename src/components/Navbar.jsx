@@ -22,9 +22,16 @@ const Navbar = () => {
 }
   return (
     <>
-    <div className='border-2 border-black'>
+    <div className='border-2 border-black bg-black flex items-center justify-between px-6'>
+      <ul className=' flex text-yellow-400 gap-14 items-center justify-center font-bold'>
+        <li className='cursor-pointer'>Home</li>
+        <li className='cursor-pointer'>View Notes</li>
+        <li className='cursor-pointer'>Add Notes</li>
+        <li className='cursor-pointer'>About</li>
+        <li className='cursor-pointer'>Contact</li>
+      </ul>
     Navbar
-    <button onClick={connectWallet}  className='bg-black text-white p-2 m-3'>Connect</button>
+    <button onClick={connectWallet}  className='bg-black border-yellow-400 border-2  rounded-xl text-white p-2 m-3'>Connect</button>
     </div>
     </>
   )

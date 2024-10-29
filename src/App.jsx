@@ -6,21 +6,23 @@ import Navbar from './components/Navbar'
 import { Navigate, Route,BrowserRouter as Router, Routes } from 'react-router-dom'
 import ViewNotes from './components/ViewNotes'
 import Home from './home'
+import AddNotes from './components/addNotes'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className='bg-black '>
     <Router>
 
      <Navbar></Navbar>
      <Routes>
       <Route path="/" element={<Home></Home>}></Route>
       <Route path="/viewNotes" element={<ViewNotes></ViewNotes>}></Route>
+      <Route path="/addNotes" element={<AddNotes></AddNotes>}></Route>
      </Routes>
     </Router>
-    </>
+    </div>
   )
 }
 
