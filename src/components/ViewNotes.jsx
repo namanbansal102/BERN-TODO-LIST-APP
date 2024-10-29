@@ -32,8 +32,12 @@ const ViewNotes = () => {
     <div className='text-yellow-400 text-3xl font-bold '>View Notes</div>
       </center>
     <button onClick={loadNotes}>Click</button>
-    <div className='card-grid px-5'>
-
+    <div className='card-grid grid px-5 grid-cols-3 gap-y-8'>
+    <NoteCard></NoteCard>
+    <NoteCard></NoteCard>
+    <NoteCard></NoteCard>
+    <NoteCard></NoteCard>
+    <NoteCard></NoteCard>
     <NoteCard></NoteCard>
     </div>
     </div>

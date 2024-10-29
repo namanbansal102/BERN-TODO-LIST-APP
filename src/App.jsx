@@ -7,6 +7,7 @@ import { Navigate, Route,BrowserRouter as Router, Routes } from 'react-router-do
 import ViewNotes from './components/ViewNotes'
 import Home from './home'
 import AddNotes from './components/addNotes'
+import Register from './components/register'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Home></Home>}></Route>
       <Route path="/viewNotes" element={<ViewNotes></ViewNotes>}></Route>
       <Route path="/addNotes" element={<AddNotes></AddNotes>}></Route>
+      <Route path="/register" element={<Register></Register>}></Route>
      </Routes>
     </Router>
     </div>
