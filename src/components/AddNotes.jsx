@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import ABI from "./ABI.json";
 import Web3 from 'web3';
+import { useNavigate } from 'react-router-dom';
 const web3=new Web3(window.ethereum )
 const contractAdd="0x35d67C245b38A28c631aB50F56f7D994dC75bC12";
 const todoContract=new web3.eth.Contract(ABI,contractAdd)
@@ -11,7 +12,7 @@ const AddNotes = () => {
 
   const [loading, setLoading] = useState(true)
   const [value, setvalue] = useState("")
-  
+  const router=useNavigate();
   const handleClose=async ()=>{
     console.log("handle Close is Running");
     try{
@@ -28,6 +29,7 @@ setLoading(false)
       
       toast.success("Note Added Succesfully")
       setLoading(true)
+      router("/viewNotes")
     }
     catch(e){
       console.log(e);

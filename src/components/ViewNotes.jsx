@@ -38,9 +38,9 @@ const ViewNotes = () => {
     <div className='bg-black h-full overflow-y-hidden'>
       <center>
 
-    <div className='text-yellow-400 text-3xl font-bold '>View Notes</div>
+    <div className='text-yellow-400 text-3xl font-bold mb-3 '>View Notes</div>
       </center>
-    <button onClick={loadNotes} className='text-yellow-300'>Click</button>
+   
     <div className='card-grid grid px-5 grid-cols-3 gap-y-8'>
 {notes.map(({noteId,descritption,date})=>{
 return <NoteCard props={{noteId,"desc":descritption,"date":date}}></NoteCard>
