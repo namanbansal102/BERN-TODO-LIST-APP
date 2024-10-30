@@ -1,4 +1,5 @@
 import HomeCardsDesign from "../components/HomeCardsDesign";
+import NewsSlider from "../components/NewsSlider";
 
 export default function Home() {
     return (
@@ -77,6 +78,7 @@ export default function Home() {
      
       </div>
       <HomeCardsDesign></HomeCardsDesign>
+        <NewsSlider></NewsSlider>
       </>
     )
   }

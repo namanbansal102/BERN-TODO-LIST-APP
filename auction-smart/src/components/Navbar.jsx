@@ -216,8 +216,11 @@ export default function Component() {
                   <span className="sr-only">Discord</span>
                 </a>
                 <button
+                 style={{
+                  background: "linear-gradient(135deg, rgb(45, 206, 137) 0%, rgb(0, 147, 233) 100%)",
+                }}
                   onClick={connectWallet}
-                  className="rounded-md bg-purple-600 px-4 py-1.5 text-base font-medium text-white transition-colors hover:bg-purple-700 hover:[text-shadow:0_0_10px_#fff]"
+                  className="rounded-md  px-4 py-1.5 text-base font-medium text-white transition-colors  hover:[text-shadow:0_0_10px_#fff]"
                 >
                   {isConnecting
                     ? 'Connecting...'
