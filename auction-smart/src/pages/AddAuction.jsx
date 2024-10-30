@@ -1,9 +1,9 @@
 import React from 'react'
 
-const addAuction = () => {
+const AddAuction = () => {
   return (
     <div>addAuction</div>
   )
 }
 
-export default addAuction
+export default AddAuction

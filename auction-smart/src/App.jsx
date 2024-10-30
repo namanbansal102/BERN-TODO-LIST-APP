@@ -5,6 +5,8 @@ import './App.css'
 import Home from './pages/home'
 import { Navigate, Route,BrowserRouter as Router, Routes } from 'react-router-dom'
 import UserProfile from './pages/UserProfile'
+import ViewAuction from './pages/ViewAuction'
+import AddAuction from './pages/addAuction'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/userProfile' element={<UserProfile></UserProfile>}></Route>
+        <Route path='/view-auction' element={<ViewAuction></ViewAuction>}></Route>
+        <Route path='/add-auction' element={<AddAuction></AddAuction>}></Route>
       </Routes>
       
          </Router>
