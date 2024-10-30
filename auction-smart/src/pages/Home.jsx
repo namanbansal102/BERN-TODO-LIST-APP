@@ -11,7 +11,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto w-full py-20 lg:py-32 px-8 z-40">
           <div className="w-full lg:w-2/3 flex flex-col gap-8">
             {/* Funding Badge */}
-            <div>
+            <div> 
               <a 
                 href="/elevate" 
                 className="inline-flex items-center gap-2 rounded-full border shadow-sm px-3 pr-5 py-2 bg-white"

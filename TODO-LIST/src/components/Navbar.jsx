@@ -39,7 +39,7 @@ const Navbar = () => {
       try {
         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
         console.log("Connected account:", accounts[0]);
-        setAccount(accounts[0]);
+        setAccount(accounts[0]);  
         const web3 = new Web3(window.ethereum);
         const balance = await web3.eth.getBalance(accounts[0]);
         console.log("Balance is:::", web3.utils.fromWei(balance, "ether"), "ETH");

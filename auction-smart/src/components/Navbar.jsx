@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import Web3 from 'web3'
 // import { ethers } from 'ethers'
 
 export default function Component() {
@@ -9,6 +10,7 @@ export default function Component() {
   const [activeDropdown, setActiveDropdown] = useState(null)
 
   const connectWallet = async () => {
+    
     if (typeof window.ethereum === 'undefined') {
       alert('Please install MetaMask!')
       return
@@ -16,8 +18,11 @@ export default function Component() {
 
     try {
       setIsConnecting(true)
-      const provider = new ethers.BrowserProvider(window.ethereum)
-      const accounts = await provider.send('eth_requestAccounts', [])
+      const accounts = await window.ethereum.request({ method: "eth_accounts" });
+      
+      const web3 = new Web3(window.ethereum);
+      const balance = await web3.eth.getBalance(accounts[0]);
+      console.log("Balance is:::", web3.utils.fromWei(balance, "ether"), "ETH");
       setAccount(accounts[0])
     } catch (error) {
       console.error('Error connecting wallet:', error)
