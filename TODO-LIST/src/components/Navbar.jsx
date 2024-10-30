@@ -61,7 +61,8 @@ const Navbar = () => {
   function handleWalletAction() {
     if (status === "Connect") {
       connectWallet();
-    } else {
+    } 
+    else {
       disconnectWallet();
     }
   }
