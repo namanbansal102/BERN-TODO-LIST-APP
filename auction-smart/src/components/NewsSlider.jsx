@@ -49,9 +49,8 @@ export default function NewsSlider() {
   }, [])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16">
+    <div className="max-w-7xl mx-auto px-4 ">
       <div className="space-y-4 mb-12">
-        <p className="text-emerald-400 text-sm font-medium">News</p>
         <h1 className="text-5xl font-bold">Latest news.</h1>
         <p className="text-xl text-gray-600">
           Let's catch you up on what is happening in the Neo X ecosystem.
