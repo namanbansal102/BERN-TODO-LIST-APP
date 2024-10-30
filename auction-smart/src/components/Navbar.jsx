@@ -1,9 +1,12 @@
+
 import { useState } from 'react'
 // import { ethers } from 'ethers'
-export default function Navbar() {
+
+export default function Component() {
   const [isOpen, setIsOpen] = useState(false)
   const [account, setAccount] = useState('')
   const [isConnecting, setIsConnecting] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState(null)
 
   const connectWallet = async () => {
     if (typeof window.ethereum === 'undefined') {
@@ -23,14 +26,18 @@ export default function Navbar() {
     }
   }
 
+  const toggleDropdown = (name) => {
+    setActiveDropdown(activeDropdown === name ? null : name)
+  }
+
   return (
-    <nav className="border-b border-neutral-800 bg-black">
+    <nav className="border-b border-neutral-800 bg-black font-semibold">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <span className="text-2xl font-bold text-purple-500 [text-shadow:0_0_10px_#a855f7,0_0_20px_#a855f7]">
+              <span className="text-3xl font-bold text-purple-500 ">
                 Vite
               </span>
             </div>
@@ -54,7 +61,7 @@ export default function Navbar() {
                 <input
                   type="search"
                   placeholder="Search"
-                  className="w-48 bg-transparent text-sm text-neutral-200 placeholder-neutral-400 focus:outline-none"
+                  className="w-48 bg-transparent text-base text-neutral-200 placeholder-neutral-400 focus:outline-none"
                 />
                 <kbd className="hidden rounded border border-neutral-700 px-1.5 text-xs text-neutral-400 sm:block">
                   Ctrl K
@@ -65,46 +72,122 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4">
+            <div className="ml-10 flex items-center space-x-6">
               <a
                 href="#"
-                className="text-sm text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
+                className="text-lg text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
               >
                 Guide
               </a>
               <a
                 href="#"
-                className="text-sm text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
+                className="text-lg text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
               >
                 Config
               </a>
-              <a
-                href="#"
-                className="text-sm text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
+              
+              {/* Plugins Dropdown */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setActiveDropdown('plugins')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                Plugins
-              </a>
-              <div className="relative inline-block text-left">
-                <button className="text-sm text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]">
-                  Resources
+                <button
+                  className="flex items-center text-lg text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
+                  aria-expanded={activeDropdown === 'plugins'}
+                  aria-haspopup="true"
+                >
+                  Plugins
                   <svg
-                    className="ml-1 -mr-1 inline-block h-4 w-4"
+                    className={`ml-1 h-4 w-4 transform transition-transform ${
+                      activeDropdown === 'plugins' ? 'rotate-180' : ''
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
+                {activeDropdown === 'plugins' && (
+                  <div className="absolute right-0 mt-2 w-48 rounded-md bg-neutral-900 py-2 shadow-lg ring-1 ring-black ring-opacity-5">
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Official Plugins
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Community Plugins
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Plugin Guide
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {/* Resources Dropdown */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setActiveDropdown('resources')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  className="flex items-center text-lg text-neutral-300 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
+                  aria-expanded={activeDropdown === 'resources'}
+                  aria-haspopup="true"
+                >
+                  Resources
+                  <svg
+                    className={`ml-1 h-4 w-4 transform transition-transform ${
+                      activeDropdown === 'resources' ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {activeDropdown === 'resources' && (
+                  <div className="absolute right-0 mt-2 w-48 rounded-md bg-neutral-900 py-2 shadow-lg ring-1 ring-black ring-opacity-5">
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Documentation
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Blog
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Team
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+                    >
+                      Release Notes
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* Social Links */}
-              <div className="flex items-center space-x-4 border-l border-neutral-800 pl-4">
+              <div className="flex items-center space-x-4 border-l border-neutral-800 pl-6">
                 <a
                   href="#"
                   className="text-neutral-400 transition-colors hover:text-purple-400 hover:[text-shadow:0_0_10px_#c084fc]"
@@ -134,7 +217,7 @@ export default function Navbar() {
                 </a>
                 <button
                   onClick={connectWallet}
-                  className="rounded-md bg-purple-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-purple-700 hover:[text-shadow:0_0_10px_#fff]"
+                  className="rounded-md bg-purple-600 px-4 py-1.5 text-base font-medium text-white transition-colors hover:bg-purple-700 hover:[text-shadow:0_0_10px_#fff]"
                 >
                   {isConnecting
                     ? 'Connecting...'
@@ -192,28 +275,98 @@ export default function Navbar() {
         <div className="space-y-1 px-2 pb-3 pt-2">
           <a
             href="#"
-            className="block rounded-md px-3 py-2 text-base text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+            className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
           >
             Guide
           </a>
           <a
             href="#"
-            className="block rounded-md px-3 py-2 text-base text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+            className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
           >
             Config
           </a>
-          <a
-            href="#"
-            className="block rounded-md px-3 py-2 text-base text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+          <button
+            onClick={() => toggleDropdown('mobile-plugins')}
+            className="flex w-full items-center rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
           >
             Plugins
-          </a>
-          <a
-            href="#"
-            className="block rounded-md px-3 py-2 text-base text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+            <svg
+              className={`ml-2 h-4 w-4 transform transition-transform ${
+                activeDropdown === 'mobile-plugins' ? 'rotate-180' : ''
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {activeDropdown === 'mobile-plugins' && (
+            <div className="ml-4 space-y-1">
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Official Plugins
+              </a>
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Community Plugins
+              </a>
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Plugin Guide
+              </a>
+            </div>
+          )}
+          <button
+            onClick={() => toggleDropdown('mobile-resources')}
+            className="flex w-full items-center rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
           >
             Resources
-          </a>
+            <svg
+              className={`ml-2 h-4 w-4 transform transition-transform ${
+                activeDropdown === 'mobile-resources' ? 'rotate-180' : ''
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {activeDropdown === 'mobile-resources' && (
+            <div className="ml-4 space-y-1">
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Documentation
+              </a>
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Blog
+              </a>
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Team
+              </a>
+              <a
+                href="#"
+                className="block rounded-md px-3 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-purple-400"
+              >
+                Release Notes
+              </a>
+            </div>
+          )}
           <div className="border-t border-neutral-800 pt-4">
             <button
               onClick={connectWallet}
