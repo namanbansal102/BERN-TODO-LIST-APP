@@ -8,7 +8,8 @@ const ViewAuction = () => {
       Products
       </center>
       <div className="grid-cards grid grid-cols-3 gap-x-2">
-
+      <AuctionCard></AuctionCard>
+      <AuctionCard></AuctionCard>
       <AuctionCard></AuctionCard>
       <AuctionCard></AuctionCard>
       <AuctionCard></AuctionCard>
