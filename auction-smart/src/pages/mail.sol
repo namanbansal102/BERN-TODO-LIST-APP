@@ -101,7 +101,7 @@ contract Auction {
             else{
                 // transferring the amount to all the person whose amount is not equal to that
                userAdd.transfer(amount);
-
+fdfdfdf
             }
         
 
