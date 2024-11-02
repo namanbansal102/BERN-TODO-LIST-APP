@@ -5,9 +5,9 @@ import './App.css'
 import Home from './pages/home'
 import { Navigate, Route,BrowserRouter as Router, Routes } from 'react-router-dom'
 import UserProfile from './pages/UserProfile'
-import ViewAuction from './pages/ViewAuction'
-import AuctionPage from './pages/AuctionPage'
-import AddAuction from './pages/AddAuction'
+import AddHospital from './pages/AddHospital'
+import PatientRegistration from './pages/RegisterPatient'
+import ViewHospital from './pages/ViewHospital'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,9 +18,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/userProfile' element={<UserProfile></UserProfile>}></Route>
-        <Route path='/view-auction' element={<ViewAuction></ViewAuction>}></Route>
-        <Route path='/add-auction' element={<AddAuction></AddAuction>}></Route>
-        <Route path='/view-auction/:id' element={<AuctionPage></AuctionPage>}></Route>
+        <Route path='/view-hospital' element={<ViewHospital></ViewHospital>}></Route>
+        <Route path='/add-hospital' element={<AddHospital></AddHospital>}></Route>
+        <Route path='/register-patient' element={<PatientRegistration></PatientRegistration>}></Route>
+        {/* <Route path='/view-auction/:id' element={<AuctionPage></AuctionPage>}></Route> */}
       </Routes>
       
          </Router>

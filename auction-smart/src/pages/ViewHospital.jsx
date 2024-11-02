@@ -1,7 +1,7 @@
 import React from 'react'
 import AuctionCard from '../components/AuctionCArd'
 
-const ViewAuction = () => {
+const ViewHospital = () => {
   return (
     <div>
       <center className='text-4xl font-bold mt-2'>
@@ -18,4 +18,4 @@ const ViewAuction = () => {
   )
 }
 
-export default ViewAuction
+export default ViewHospital
