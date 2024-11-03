@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import Web3 from 'web3'
-// import { ethers } from 'ethers'
+import { ethers } from 'ethers'
 
 export default function Component() {
   const [isOpen, setIsOpen] = useState(false)
