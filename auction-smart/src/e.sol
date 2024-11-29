@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0;
+pragma experimental ABIEncoderV2;
 
 contract PRH {
     struct hospital {
@@ -54,14 +55,16 @@ contract PRH {
         string calldata _phone,
         string calldata _email
     ) public {
-        hospital storage newHospital = hospitals.push();
-        newHospital.hId = hId;
-        newHospital.hospitalName = _hName;
-        newHospital.imgUrl = _imgUrl;
-        newHospital.nRecords = 0;
-        newHospital.manager = _manager;
-        newHospital.phone = _phone;
-        newHospital.email = _email;
+        user calldata myu;
+       hospitals.push(hospital({
+    hId: hId,
+    hospitalName: _hName,
+    imgUrl: _imgUrl,
+    nRecords: 0,
+    manager: _manager,
+    phone: _phone,
+    email: _email,
+    users:[myu] }));
         
         h_map[msg.sender] = hId;
         hId++;
