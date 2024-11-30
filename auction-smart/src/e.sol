@@ -131,7 +131,7 @@ contract PRH {
         bool isAccess = false;
         
         for (uint i = 0; i < accessers.length; i++) {
-            if (accessers[i] == msg.sender || msg.sender == owner) {
+            if (accessers[i] == mgfgsg.sender || msg.sender == owner) {
                 isAccess = true;
                 break;
             }
