@@ -11,18 +11,19 @@ contract PRH {
         string manager;
         string phone;
         string email;
-        user[] users;
     }
     
     struct user {
         address h_address;
         address u_address;
         uint userId;
-        record[] records;
+        uint hId;
     }
     
     struct record {
         uint rId;
+        address u_add;
+        uint hId;
         string date;
         string expiry;
         string recordUrl;
@@ -33,7 +34,6 @@ contract PRH {
     uint public hId = 0;
     uint public userId = 0;
     uint public rId = 0;
-    
     address[] public accessers = [
         0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, // airport
         0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, // public hospital
@@ -42,7 +42,7 @@ contract PRH {
     
     hospital[] public hospitals;
     mapping(address => uint) public h_map;
-    mapping(address => uint) public u_map;
+    record[] public u_map;
 
     constructor() {
         owner = msg.sender;
@@ -55,16 +55,18 @@ contract PRH {
         string calldata _phone,
         string calldata _email
     ) public {
-        user calldata myu;
-       hospitals.push(hospital({
+
+       hospitals.push(
+        hospital({
     hId: hId,
     hospitalName: _hName,
     imgUrl: _imgUrl,
     nRecords: 0,
     manager: _manager,
     phone: _phone,
-    email: _email,
-    users:[myu] }));
+    email: _email
+   
+    }));
         
         h_map[msg.sender] = hId;
         hId++;
@@ -73,80 +75,40 @@ contract PRH {
     function viewhospitals() public view returns (hospital[] memory) {
         return hospitals;
     }
-    
     function addUserData(
         address u_add,
         string calldata _date,
         string calldata _expiryDate,
         string calldata _recordUrl,
         string calldata _rstatus
-    ) external {
+    ) public  {
         require(h_map[msg.sender] < hospitals.length, "Hospital not registered");
+    record memory newRecord = record(rId,u_add,h_map[msg.sender], _date, _expiryDate, _recordUrl, _rstatus);
+    u_map.push(newRecord);
+    rId++;
+    userId++;
         
-        uint _hId = h_map[msg.sender];
-        record memory newRecord = record(rId, _date, _expiryDate, _recordUrl, _rstatus);
-        
-        if (u_map[u_add] == 0 && hospitals[_hId].users.length == 0) {
-            // Create new user directly in storage
-            hospitals[_hId].users.push();
-            uint newUserIndex = hospitals[_hId].users.length - 1;
-            
-            hospitals[_hId].users[newUserIndex].h_address = msg.sender;
-            hospitals[_hId].users[newUserIndex].u_address = u_add;
-            hospitals[_hId].users[newUserIndex].userId = userId;
-            hospitals[_hId].users[newUserIndex].records.push(newRecord);
-            
-            u_map[u_add] = userId;
-            userId++;
-        } else {
-            bool userFound = false;
-            for (uint i = 0; i < hospitals[_hId].users.length; i++) {
-                if (hospitals[_hId].users[i].u_address == u_add) {
-                    hospitals[_hId].users[i].records.push(newRecord);
-                    userFound = true;
-                    break;
-                }
-            }
-            
-            if (!userFound) {
-                // Create new user directly in storage
-                hospitals[_hId].users.push();
-                uint newUserIndex = hospitals[_hId].users.length - 1;
-                
-                hospitals[_hId].users[newUserIndex].h_address = msg.sender;
-                hospitals[_hId].users[newUserIndex].u_address = u_add;
-                hospitals[_hId].users[newUserIndex].userId = userId;
-                hospitals[_hId].users[newUserIndex].records.push(newRecord);
-                
-                u_map[u_add] = userId;
-                userId++;
-            }
-        }
-        
-        hospitals[_hId].nRecords++;
-        rId++;
     }
     
-    function fetchUserProfile() public view returns (user memory) {
-        bool isAccess = false;
-        
-        for (uint i = 0; i < accessers.length; i++) {
-            if (accessers[i] == mgfgsg.sender || msg.sender == owner) {
-                isAccess = true;
-                break;
+ function fetchUserProfile(address u_add) external view returns (record[] memory) {
+        // Count matching records first to determine array size
+        uint256 count = 0;
+        for (uint256 i = 0; i < u_map.length; i++) {
+            if (u_map[i].u_add == u_add && u_map[i].hId == h_map[msg.sender]) {
+                count++;
             }
         }
-        
-        require(isAccess || u_map[msg.sender] != 0, "Not Accessible");
 
-        for (uint i = 0; i < hospitals.length; i++) {
-            for (uint j = 0; j < hospitals[i].users.length; j++) {
-                if (hospitals[i].users[j].u_address == msg.sender) {
-                    return hospitals[i].users[j];
-                }
+        // Create a fixed-size memory array
+        record[] memory userRecord = new record[](count);
+        uint256 index = 0;
+        for (uint256 i = 0; i < u_map.length; i++) {
+            if (u_map[i].u_add == u_add && u_map[i].hId == h_map[msg.sender]) {
+                userRecord[index] = u_map[i];
+                index++;
             }
         }
-        
-        revert("User not found");
+
+        return userRecord;
     }
 }
