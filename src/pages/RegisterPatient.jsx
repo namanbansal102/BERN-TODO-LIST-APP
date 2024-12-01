@@ -1,19 +1,113 @@
 'use client'
 
 import { useState } from 'react'
+import Web3 from 'web3';
 
+const contractAdd = "0xdfa986440dfa2357bA1a63eb8F088f2C1b72a766";
+import ABI from "./ABI.json";
 
 export default function PatientRegistration() {
   const [patientImageUrl, setPatientImageUrl] = useState(null)
   const [documentUrl, setDocumentUrl] = useState(null)
+  const [patientName, setPatientName] = useState('')
+  const [metamaskAddress, setMetamaskAddress] = useState('')
+  const [address, setAddress] = useState('')
+  const [contactPhone, setContactPhone] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [checkupDate, setCheckupDate] = useState('')
+  const [documentValidity, setDocumentValidity] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleImageUpload = (event, setter) => {
+  const handleImageUpload = async (event, setter) => {
     const file = event.target.files?.[0]
     if (file) {
       const url = URL.createObjectURL(file)
       setter(url)
+      
+      // Convert image to byte string
+      const arrayBuffer = await file.arrayBuffer();
+      const byteArray = new Uint8Array(arrayBuffer);
+      const byteString = Array.from(byteArray, (byte) => String.fromCharCode(byte)).join('');
+      
+      // You can store this byteString in state if needed
+      console.log("Image byte string:", byteString);
     }
   }
+
+  const handleDocumentUpload = async (event) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const url = URL.createObjectURL(file)
+      setDocumentUrl(url)
+      
+      // Convert document to byte string
+      const arrayBuffer = await file.arrayBuffer();
+      const byteArray = new Uint8Array(arrayBuffer);
+      const byteString = Array.from(byteArray, (byte) => String.fromCharCode(byte)).join('');
+      
+      // You can store this byteString in state if needed
+      console.log("Document byte string:", byteString);
+    }
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setError(null);
+  
+    try {
+      if (typeof window.ethereum === 'undefined') {
+        throw new Error('Please install MetaMask to use this feature');
+      }
+  
+      const web3 = new Web3(window.ethereum);
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+  
+      const contract = new web3.eth.Contract(ABI, contractAdd);
+      const accounts = await web3.eth.getAccounts();
+  
+      if (!web3.utils.isAddress(metamaskAddress)) {
+        throw new Error("Invalid Ethereum address.");
+      }
+  
+      // Convert dates to Unix timestamps and then to strings
+      const checkupTimestamp = Math.floor(new Date(checkupDate).getTime() / 1000).toString();
+      const validityTimestamp = Math.floor(new Date(documentValidity).getTime() / 1000).toString();
+  
+      const result = await contract.methods.addUserData(
+        metamaskAddress,
+        `${checkupTimestamp}_${patientName}_${contactPhone}`,
+        validityTimestamp,
+        documentUrl || '',
+        patientImageUrl || ''
+      ).send({
+        from: accounts[0],
+        gasPrice: await web3.eth.getGasPrice(),
+      });
+  
+      console.log("Transaction successful:", result);
+  
+      // Reset form after successful submission
+      setPatientName('');
+      setMetamaskAddress('');
+      setAddress('');
+      setContactPhone('');
+      setContactEmail('');
+      setCheckupDate('');
+      setDocumentValidity('');
+      setPatientImageUrl(null);
+      setDocumentUrl(null);
+  
+      alert('Patient registered successfully!');
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -22,7 +116,7 @@ export default function PatientRegistration() {
           <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">
             Add New Patient
           </h1>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label htmlFor="patientImage" className="block text-lg font-semibold text-gray-700">Patient Image</label>
@@ -69,6 +163,8 @@ export default function PatientRegistration() {
                     placeholder="Enter patient's full name"
                     required
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400"
+                    value={patientName}
+                    onChange={(e) => setPatientName(e.target.value)}
                   />
                 </div>
 
@@ -91,6 +187,8 @@ export default function PatientRegistration() {
                     placeholder="Enter Metamask address"
                     required
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400"
+                    value={metamaskAddress}
+                    onChange={(e) => setMetamaskAddress(e.target.value)}
                   />
                 </div>
               </div>
@@ -103,6 +201,8 @@ export default function PatientRegistration() {
                 placeholder="Enter patient's complete address"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400 min-h-[100px]"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
 
@@ -130,7 +230,7 @@ export default function PatientRegistration() {
                   type="file"
                   accept=".pdf,.doc,.docx"
                   className="hidden"
-                  onChange={(e) => handleImageUpload(e, setDocumentUrl)}
+                  onChange={handleDocumentUpload}
                 />
                 <button
                   type="button"
@@ -151,6 +251,8 @@ export default function PatientRegistration() {
                   placeholder="Enter contact number"
                   required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400"
+                  value={contactPhone}
+                  onChange={(e) => setContactPhone(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
@@ -161,6 +263,8 @@ export default function PatientRegistration() {
                   placeholder="Enter contact email"
                   required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400"
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -173,6 +277,8 @@ export default function PatientRegistration() {
                   type="date"
                   required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400"
+                  value={checkupDate}
+                  onChange={(e) => setCheckupDate(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
@@ -182,6 +288,8 @@ export default function PatientRegistration() {
                   type="date"
                   required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400"
+                  value={documentValidity}
+                  onChange={(e) => setDocumentValidity(e.target.value)}
                 />
               </div>
             </div>
@@ -189,12 +297,20 @@ export default function PatientRegistration() {
             <button
               type="submit"
               className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-green-400 hover:from-blue-600 hover:to-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 hover:scale-105"
+              disabled={isLoading}
             >
-              Register Patient
+              {isLoading ? 'Registering...' : 'Register Patient'}
             </button>
+
+            {error && (
+              <div className="mt-4 text-red-600 text-center">
+                {error}
+              </div>
+            )}
           </form>
         </div>
       </div>
     </div>
   )
 }
+
