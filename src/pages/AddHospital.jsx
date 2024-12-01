@@ -2,9 +2,12 @@
 
 import { useState } from 'react'
 import { ethers } from 'ethers'
-
-// ABI for the addHospital function
-const abi =[];
+import Web3 from 'web3';
+const contractAdd="0xdfa986440dfa2357bA1a63eb8F088f2C1b72a766";
+import ABI from "./ABI.json";
+const web3=new Web3(window.ethereum )
+const contract=new web3.eth.Contract(ABI,contractAdd)
+console.log(contract);
 
 export default function AddHospital() {
   const [imageUrl, setImageUrl] = useState(null)
@@ -48,35 +51,24 @@ export default function AddHospital() {
 
     try {
       // Connect to the Ethereum network
-      const provider = new ethers.BrowserProvider(window.ethereum);
-
-      
-      try {
-        // Request account access
-        await provider.send("eth_requestAccounts", [])
-      } catch (error) {
-        setError('Failed to connect to your Ethereum wallet. Please make sure you have granted permission.')
-        setIsLoading(false)
-        return
-      }
-
-      const signer = provider.getSigner()
-
-      // Replace with your actual contract address
-      const contractAddress = "YOUR_CONTRACT_ADDRESS_HERE"
-      const contract = new ethers.Contract(contractAddress, abi, signer)
-
-      // Call the addHospital function
-      const tx = await contract.addHospital(
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const userAddress=accounts[0];
+      console.log("My user Address is:::"+userAddress);
+      const res=await contract.methods.addHospital(
         formData.hospitalName,
         imageUrl || '',
         formData.managerName,
         formData.contactPhone,
         formData.contactEmail
-      )
+      ).send({
+        from:userAddress,
+        gasPrice:await web3.eth.getGasPrice()
 
-      // Wait for the transaction to be mined
-      await tx.wait()
+      })
+      console.log("My Final Result Called is:::::"+res);
+      
+      
+      // Call the addHospital function
 
       setSuccess(true)
     } catch (err) {

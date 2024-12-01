@@ -1,5 +1,29 @@
 [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "accessers",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -66,24 +90,56 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "u_add",
+				"type": "address"
 			}
 		],
-		"name": "accessers",
+		"name": "fetchUserProfile",
 		"outputs": [
 			{
-				"internalType": "address",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "rId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "u_add",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "hId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "date",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "expiry",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "recordUrl",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "r_status",
+						"type": "string"
+					}
+				],
+				"internalType": "struct PRH.record[]",
 				"name": "",
-				"type": "address"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -91,61 +147,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "fetchUserProfile",
+		"name": "hId",
 		"outputs": [
 			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "h_address",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "u_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "userId",
-						"type": "uint256"
-					},
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "rId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "string",
-								"name": "date",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "expiry",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "recordUrl",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "r_status",
-								"type": "string"
-							}
-						],
-						"internalType": "struct PRH.record[]",
-						"name": "records",
-						"type": "tuple[]"
-					}
-				],
-				"internalType": "struct PRH.user",
+				"internalType": "uint256",
 				"name": "",
-				"type": "tuple"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -160,19 +167,6 @@
 			}
 		],
 		"name": "h_map",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "hId",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -248,17 +242,47 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
+				"internalType": "uint256",
 				"name": "",
-				"type": "address"
+				"type": "uint256"
 			}
 		],
 		"name": "u_map",
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "rId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "u_add",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "hId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "date",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "expiry",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "recordUrl",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "r_status",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -285,95 +309,21 @@
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "hId",
+						"name": "id",
 						"type": "uint256"
 					},
 					{
 						"internalType": "string",
-						"name": "hospitalName",
+						"name": "name",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "imgUrl",
+						"name": "image",
 						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "nRecords",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "manager",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "phone",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "email",
-						"type": "string"
-					},
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "h_address",
-								"type": "address"
-							},
-							{
-								"internalType": "address",
-								"name": "u_address",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "userId",
-								"type": "uint256"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "rId",
-										"type": "uint256"
-									},
-									{
-										"internalType": "string",
-										"name": "date",
-										"type": "string"
-									},
-									{
-										"internalType": "string",
-										"name": "expiry",
-										"type": "string"
-									},
-									{
-										"internalType": "string",
-										"name": "recordUrl",
-										"type": "string"
-									},
-									{
-										"internalType": "string",
-										"name": "r_status",
-										"type": "string"
-									}
-								],
-								"internalType": "struct PRH.record[]",
-								"name": "records",
-								"type": "tuple[]"
-							}
-						],
-						"internalType": "struct PRH.user[]",
-						"name": "users",
-						"type": "tuple[]"
 					}
 				],
-				"internalType": "struct PRH.hospital[]",
+				"internalType": "struct PRH.HospitalDetail[]",
 				"name": "",
 				"type": "tuple[]"
 			}
