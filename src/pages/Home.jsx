@@ -67,7 +67,7 @@ export default function Home() {
         </div>
   
         {/* Shadow Divider */}
-        {/* <div className="mt-auto w-full hero-top-shadow h-1 z-50">&nbsp;</div> */}
+        <div className="mt-auto w-full hero-top-shadow h-1 z-50">&nbsp;</div>
   
         {/* Hero Image */}
         <div className="absolute top-0 lg:right-0 -right-40 translate-x-1/2 lg:translate-x-0 lg:flex z-10">
