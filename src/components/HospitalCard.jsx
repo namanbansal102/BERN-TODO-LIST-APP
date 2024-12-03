@@ -2,7 +2,7 @@ import { Clock, Users, TrendingUp, ArrowRight } from "lucide-react"
 import { PinataSDK } from "pinata";
 import { useEffect, useState } from "react";
 
-export default function AuctionCard({props}) {
+export default function HospitalCard({props}) {
   console.log("My props are :::::",props);
   const [imageUrl, setimageUrl] = useState("");
   
@@ -86,7 +86,10 @@ useEffect(() => {
               >
                 <div className="relative z-10 flex items-center justify-center gap-2 text-white">
                   <TrendingUp className="h-5 w-5" />
+                  {/* <link></link> */}
+                  <a href='/userProfile'>
                   <span className="font-semibold">Visit Hospital</span>
+                  </a>
                   <ArrowRight className="h-5 w-5" />
                 </div>
                 <div

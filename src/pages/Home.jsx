@@ -42,7 +42,7 @@ export default function Home() {
   
             {/* Hero Text */}
             <p className="font-bold text-5xl lg:text-[90px] flex flex-col">
-              <span className="whitespace-nowrap">New horizons.</span>
+              <span className="whitespace-nowrap">New Life</span>
               <span>It's Neo X.</span>
             </p>
   
@@ -54,11 +54,11 @@ export default function Home() {
             {/* CTA Button */}
             <div className="flex items-center gap-8">
               <a 
-                href="https://docs.banelabs.org/" 
+                href="/viewHospital" 
                 target="_blank"
                 className="bg-black font-semibold py-3 px-5 text-white rounded-full hover:bg-gray-900 transition-colors"
               >
-                Go to Docs
+                View Hospitals
               </a>
             </div>
           </div>

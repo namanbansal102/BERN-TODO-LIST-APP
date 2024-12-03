@@ -71,18 +71,15 @@ export default function UserProfile() {
   
       // Assuming the first record is patient data
       if (records.length > 0) {
-        const patient = records[1];
-
-        
+        const patient = records[0];
       let p=await fetchImageUrl(patient.imageUrl)
-       
         const details=patient.name.split("_")
         setPatientData({
           name: details[1],
           checkupDate: patient.checkupDate,
           phone: details[2],
           imageUrl: p,
-        })
+        })  
       }
   
       setMedicalRecords(records) // Other records as medical records
@@ -96,14 +93,17 @@ export default function UserProfile() {
   
 
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="container mx-auto py-10 px-4 bg-black">
       {!patientData &&
+      <div>
+      <h1 className='text-5xl m-3'>Enter Patient Address To Fetch Records</h1>
       <MetamaskInput
       value={metamaskAddress}
       onChange={setMetamaskAddress}
       onSubmit={fetchPatientData}
       isLoading={isLoading}
       />
+      </div>
     }
 
       {error && (

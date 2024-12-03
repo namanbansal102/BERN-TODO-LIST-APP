@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import AuctionCard from '../components/AuctionCArd'
+import HospitalCard from '../components/HospitalCard'
 import Web3 from 'web3';
 const contractAdd="0xdfa986440dfa2357bA1a63eb8F088f2C1b72a766";
 import ABI from "./ABI.json";
@@ -40,12 +40,12 @@ const ViewHospital = () => {
 
   return (
     <div>
-      <center className='text-4xl font-bold mt-2'>
+      <center className='text-4xl font-bold mt-5'>
       Registered hospitals are
       </center>
       <div className="grid-cards grid grid-cols-3 gap-x-2">
         {hospitals.map(({id,image,name})=>{
-          return  <AuctionCard key={id} props={{id,image,name}}></AuctionCard>
+          return  <HospitalCard key={id} props={{id,image,name}}></HospitalCard>
         })}
  
       </div>

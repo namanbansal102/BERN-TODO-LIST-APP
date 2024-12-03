@@ -52,7 +52,7 @@ export default function PatientRegistration() {
       setFileArrayBuffer(file)
       const byteArray = new Uint8Array(arrayBuffer);
       const byteString = Array.from(byteArray, (byte) => String.fromCharCode(byte)).join('');
-      
+        
       // You can store this byteString in state if needed
       console.log("Document byte string:", byteString);
     }
@@ -65,6 +65,7 @@ export default function PatientRegistration() {
       setFileCID(uploadFile.cid);
       setImageCID(uploadImage.cid);
       console.log("Hoorahy I am getting Upload as::::::",uploadFile);
+      console.log("Hoorahy I am getting Upload  Image as::::::",uploadImage);
       return true;
     } 
     catch (error) {
@@ -93,7 +94,6 @@ export default function PatientRegistration() {
       if (!web3.utils.isAddress(metamaskAddress)) {
         throw new Error("Invalid Ethereum address.");
       }
-  
       // Convert dates to Unix timestamps and then to strings
       const checkupTimestamp = Math.floor(new Date(checkupDate).getTime() / 1000).toString();
       const validityTimestamp = Math.floor(new Date(documentValidity).getTime() / 1000).toString();

@@ -42,9 +42,12 @@ export default function Component() {
           <div className="flex items-center">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <span className="text-3xl font-bold text-purple-500 ">
-                Vite
+              <a href="/">
+
+              <span className="text-[20px] font-bold text-green-500 ">
+                NeoXLifeChain
               </span>
+              </a>
             </div>
 
             {/* Search bar */}
@@ -79,16 +82,16 @@ export default function Component() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-6">
               <a
-                href="#"
+                href="/viewHospital"
                 className="text-lg text-neutral-300 transition-colors hover:text-green-400 hover:[text-shadow:0_0_10px_#c084fc]"
               >
-                Guide
+                Hospitals
               </a>
               <a
-                href="#"
+                href="/add-hospital"
                 className="text-lg text-neutral-300 transition-colors hover:text-green-400 hover:[text-shadow:0_0_10px_#c084fc]"
               >
-                Config
+                Register
               </a>
               
               {/* Plugins Dropdown */}
@@ -102,7 +105,7 @@ export default function Component() {
                   aria-expanded={activeDropdown === 'plugins'}
                   aria-haspopup="true"
                 >
-                  Plugins
+                  Details
                   <svg
                     className={`ml-1 h-4 w-4 transform transition-transform ${
                       activeDropdown === 'plugins' ? 'rotate-180' : ''
@@ -117,22 +120,22 @@ export default function Component() {
                 {activeDropdown === 'plugins' && (
                   <div className="absolute right-0  w-48 rounded-md bg-neutral-900 py-2 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                     <a
-                      href="#"
+                      href="/register-patient"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
-                      Official Plugins
+                      Apollo Hospital
                     </a>
                     <a
-                      href="#"
+                      href="/register-patient"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
-                      Community Plugins
+                      Max Hospital
                     </a>
                     <a
-                      href="#"
+                      href="/register-patient"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
-                      Plugin Guide
+                      Neo Hospital
                     </a>
                   </div>
                 )}
