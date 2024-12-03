@@ -7,22 +7,22 @@ export default function AboutSection() {
     },
     {
       name: "Labs",
-      logo: "https://vite.dev/stackblitz.svg",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Lilly-Logo.svg/640px-Lilly-Logo.svg.png",
     },
     {
-      name: "Astro",
-      logo: "https://vite.dev/stackblitz.svg",
+      name: "Boehringer IngelHeim",
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlk9KgG5PCl-5yRfS5DVtVI0JrU6d2F43jhw&s",
     },
   ]
 
   const platinumSponsors = [
     {
       name: "Storyblok",
-      logo: "https://vite.dev/stackblitz.svg",
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqL5oEPnKruUYGtAGLvOEePluxCtLq-5G2NQ&s",
     },
     {
       name: "Bit",
-      logo: "https://vite.dev/stackblitz.svg",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Cipla_logo.svg/2560px-Cipla_logo.svg.png",
     },
   ]
 

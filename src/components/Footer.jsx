@@ -70,11 +70,15 @@ export default function Footer() {
           {/* Logo and Social Section */}
           <div className="space-y-6">
             <div
-              className="h-12 w-12 rounded-lg"
+              className="h-12 px-14 text-2xl pt-2 font-bold rounded-lg text-white"
               style={{
                 background: "linear-gradient(135deg, rgb(45, 206, 137) 0%, rgb(0, 147, 233) 100%)",
               }}
-            />
+              
+              >
+                NeoxLifeChain 
+
+              </div>
             <p className="text-gray-600 max-w-xs">
               Building the future of blockchain technology with Neo X ecosystem.
             </p>

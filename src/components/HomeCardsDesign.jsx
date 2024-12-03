@@ -31,7 +31,7 @@ export default function HomeCardsDesign() {
           },
           {
             title: "Bridge",
-            description: "Bridge your token assets between the Neo N3 and Neo X networks.",
+            description: "Electronic Health Management Easily by Spenign Less Amount Of Gas.",
             icon: (
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />

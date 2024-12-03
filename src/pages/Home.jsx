@@ -19,9 +19,12 @@ export default function Home() {
                 <span className="text-xs font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-2 py-0.5 rounded-full">
                   OPEN
                 </span>
+                <a href="/about">
+
                 <span className="font-semibold whitespace-nowrap text-sm lg:text-base">
                   $20m in funding available now
                 </span>
+                </a>
                 <svg 
                   width="6" 
                   height="11" 
@@ -48,8 +51,7 @@ export default function Home() {
   
             {/* Description */}
             <p className="font-medium lg:text-lg text-[#404056] max-w-md">
-              Neo X is an EVM-compatible sidechain creating a bridge between Neo N3 and the widely adopted EVM network
-            </p>
+              NeoxLifeChain is a Secure Based Electronic Health Management System To Manange Health Records Securely and Access Quickly.</p>
   
             {/* CTA Button */}
             <div className="flex items-center gap-8">
