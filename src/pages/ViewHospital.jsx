@@ -40,8 +40,8 @@ const ViewHospital = () => {
 
   return (
     <div>
-      <center className='text-4xl font-bold mt-5'>
-      Registered hospitals are
+      <center className='text-[50px] mt-5 font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent'>
+      Registered hospitals
       </center>
       <div className="grid-cards grid grid-cols-3 gap-x-2">
         {hospitals.map(({id,image,name})=>{
