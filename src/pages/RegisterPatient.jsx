@@ -102,8 +102,8 @@ export default function PatientRegistration() {
         metamaskAddress,
         `${checkupTimestamp}_${patientName}_${contactPhone}`,
         validityTimestamp,
-        fileCID || '',
-        imageCID || ''
+        fileCID,
+        imageCID
       ).send({
         from: accounts[0],
         gasPrice: await web3.eth.getGasPrice(),

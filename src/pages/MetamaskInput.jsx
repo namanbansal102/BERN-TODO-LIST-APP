@@ -28,8 +28,12 @@ export function MetamaskInput({ value, onChange, onSubmit, isLoading }) {
       </div>
       <button
         onClick={onSubmit}
+
+        style={{
+          background: "linear-gradient(135deg, rgb(45, 206, 137) 0%, rgb(0, 147, 233) 100%)",
+        }}
         disabled={isLoading}
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300"
+        className="rounded-md  px-4 py-3 text-base font-medium text-white transition-colors  hover:[text-shadow:0_0_10px_#fff]"
       >
         {isLoading ? (
           <Loader2 className="w-5 h-5 animate-spin" />
