@@ -49,18 +49,13 @@ useEffect(() => {
                 <img
                   src={imageUrl}
                   alt="Product Name"
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
 
                 
               </div>
               {/* Time Left Badge */}
-              <div className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 backdrop-blur-sm">
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4 text-white" />
-                  <span className="text-sm text-white">22h 39m</span>
-                </div>
-              </div>
+             
             </div>
 
             {/* Product Info */}

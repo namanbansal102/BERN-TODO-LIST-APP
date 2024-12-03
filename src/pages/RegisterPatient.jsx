@@ -59,14 +59,12 @@ export default function PatientRegistration() {
   }
   const handleIPFSUpload=async()=>{
     try {
-      
+      let arr=[];
       const uploadFile = await pinata.upload.file(fileArrayBuffer);
       const uploadImage = await pinata.upload.file(imageArrayBuffer);
-      setFileCID(uploadFile.cid);
-      setImageCID(uploadImage.cid);
-      console.log("Hoorahy I am getting Upload as::::::",uploadFile);
-      console.log("Hoorahy I am getting Upload  Image as::::::",uploadImage);
-      return true;
+      arr.push(uploadFile);
+      arr.push(uploadImage);
+      return arr;
     } 
     catch (error) {
       console.log("Getting Error::::",error);
@@ -78,8 +76,11 @@ export default function PatientRegistration() {
     event.preventDefault();
     setIsLoading(true);
     setError(null);
-    const isUploaded=await handleIPFSUpload();
-    if(!isUploaded)return;
+    const arr=await handleIPFSUpload();
+    console.log("My Arr is:::::",arr);
+    const f_arr=arr[0].cid;
+    const p_arr=arr[1].cid;
+    //if(!isUploaded)return;
     try {
       if (typeof window.ethereum === 'undefined') {
         throw new Error('Please install MetaMask to use this feature');
@@ -102,8 +103,8 @@ export default function PatientRegistration() {
         metamaskAddress,
         `${checkupTimestamp}_${patientName}_${contactPhone}`,
         validityTimestamp,
-        fileCID,
-        imageCID
+        f_arr,
+        p_arr
       ).send({
         from: accounts[0],
         gasPrice: await web3.eth.getGasPrice(),

@@ -93,7 +93,7 @@ export default function UserProfile() {
   
 
   return (
-    <div className="container mx-auto py-10 px-4 bg-black">
+    <div className="container mx-auto py-10 px-4 ">
       {!patientData &&
       <div>
       <h1 className='text-5xl m-3'>Enter Patient Address To Fetch Records</h1>

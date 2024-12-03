@@ -8,6 +8,7 @@ import UserProfile from './pages/UserProfile'
 import AddHospital from './pages/AddHospital'
 import PatientRegistration from './pages/RegisterPatient'
 import ViewHospital from './pages/ViewHospital'
+import AboutPage from './pages/About'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,7 +22,7 @@ function App() {
         <Route path='/viewHospital' element={<ViewHospital></ViewHospital>}></Route>
         <Route path='/add-hospital' element={<AddHospital></AddHospital>}></Route>
         <Route path='/register-patient' element={<PatientRegistration></PatientRegistration>}></Route>
-        {/* <Route path='/view-auction/:id' element={<AuctionPage></AuctionPage>}></Route> */}
+        <Route path='/about' element={<AboutPage></AboutPage>}></Route>
       </Routes>
       
          </Router>

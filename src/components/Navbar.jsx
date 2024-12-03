@@ -44,7 +44,7 @@ export default function Component() {
             <div className="flex-shrink-0">
               <a href="/">
 
-              <span className="text-[20px] font-bold text-green-500 ">
+              <span className="text-[20px] font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent" >
                 NeoXLifeChain
               </span>
               </a>
@@ -120,19 +120,19 @@ export default function Component() {
                 {activeDropdown === 'plugins' && (
                   <div className="absolute right-0  w-48 rounded-md bg-neutral-900 py-2 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                     <a
-                      href="/register-patient"
+                      href="/userProfile"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
                       Apollo Hospital
                     </a>
                     <a
-                      href="/register-patient"
+                      href="/userProfile"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
                       Max Hospital
                     </a>
                     <a
-                      href="/register-patient"
+                      href="/userProfile"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
                       Neo Hospital
@@ -152,7 +152,7 @@ export default function Component() {
                   aria-expanded={activeDropdown === 'resources'}
                   aria-haspopup="true"
                 >
-                  Resources
+                  Record
                   <svg
                     className={`ml-1 h-4 w-4 transform transition-transform ${
                       activeDropdown === 'resources' ? 'rotate-180' : ''
@@ -167,10 +167,10 @@ export default function Component() {
                 {activeDropdown === 'resources' && (
                   <div className="absolute right-0 mt-0 w-48 rounded-md bg-neutral-900 py-2 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                     <a
-                      href="#"
+                      href="/register-patient"
                       className="block px-4 py-2 text-lg text-neutral-300 hover:bg-neutral-800 hover:text-green-400"
                     >
-                      Documentation
+                      Add Record
                     </a>
                     <a
                       href="#"
