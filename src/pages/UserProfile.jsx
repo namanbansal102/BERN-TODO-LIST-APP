@@ -96,7 +96,7 @@ export default function UserProfile() {
     <div className="container mx-auto py-10 px-4 ">
       {!patientData &&
       <div>
-      <h1 className='text-5xl m-3'>Enter Patient Address To Fetch Records</h1>
+      <h1 className='text-[40px]  mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent'>Enter Patient Address To Fetch Records</h1>
       <MetamaskInput
       value={metamaskAddress}
       onChange={setMetamaskAddress}
