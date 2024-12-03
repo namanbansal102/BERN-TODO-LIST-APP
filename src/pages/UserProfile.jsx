@@ -61,7 +61,7 @@ export default function UserProfile() {
         hId: record.hId,
         rId: record.rId,
         checkupDate: new Date(parseInt(record.expiry) * 1000).toLocaleDateString(),
-        expiryDate: new Date(parseInt(record.expiry) * 1000).toLocaleDateString(),
+        expiryDate: new Date(parseInt(record.date.split("_")[0]) * 1000).toLocaleDateString(),
         name: record.date,
         imageUrl: record.r_status ,
         recordUrl:record.recordUrl
@@ -97,12 +97,14 @@ export default function UserProfile() {
 
   return (
     <div className="container mx-auto py-10 px-4">
+      {!patientData &&
       <MetamaskInput
-        value={metamaskAddress}
-        onChange={setMetamaskAddress}
-        onSubmit={fetchPatientData}
-        isLoading={isLoading}
+      value={metamaskAddress}
+      onChange={setMetamaskAddress}
+      onSubmit={fetchPatientData}
+      isLoading={isLoading}
       />
+    }
 
       {error && (
         <div className="mt-4 text-red-600 text-center">
@@ -141,7 +143,6 @@ export default function UserProfile() {
                 <MedicalRecordCard
                   key={record.id}
                   record={record}
-                  onClick={() => setSelectedRecord(record)}
                 />
               ))}
             </div>

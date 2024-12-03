@@ -11,7 +11,8 @@ const fetchImageUrl=async(cid)=>{
          cid: cid,
         expires: 1800000000000,
       })
-      console.log(url)
+      
+      console.log("My Img Url is",url)
       return url;
   
     } catch (error) {
