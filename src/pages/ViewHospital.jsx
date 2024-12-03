@@ -4,6 +4,7 @@ import Web3 from 'web3';
 const contractAdd="0xdfa986440dfa2357bA1a63eb8F088f2C1b72a766";
 import ABI from "./ABI.json";
 const web3=new Web3(window.ethereum )
+
 const contract=new web3.eth.Contract(ABI,contractAdd)
 console.log(contract);
 
@@ -19,8 +20,7 @@ const ViewHospital = () => {
         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
     const userAddress=accounts[0];
     console.log("My user Address is:::"+userAddress);
-    
-    const notes=await contract.methods.viewhospitals().call({from:userAddress});
+    const notes=await contract.methods.viewhospitals().call()
     console.log("my Notes are:::",notes);
     
     sethospitals(notes);
@@ -44,8 +44,8 @@ const ViewHospital = () => {
       Registered hospitals are
       </center>
       <div className="grid-cards grid grid-cols-3 gap-x-2">
-        {hospitals.map(()=>{
-          return  <AuctionCard></AuctionCard>
+        {hospitals.map(({id,image,name})=>{
+          return  <AuctionCard key={id} props={{id,image,name}}></AuctionCard>
         })}
  
       </div>

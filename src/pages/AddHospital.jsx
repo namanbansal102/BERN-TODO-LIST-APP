@@ -1,14 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { ethers } from 'ethers'
+import { PinataSDK } from "pinata";
 import Web3 from 'web3';
 const contractAdd="0xdfa986440dfa2357bA1a63eb8F088f2C1b72a766";
 import ABI from "./ABI.json";
 const web3=new Web3(window.ethereum )
 const contract=new web3.eth.Contract(ABI,contractAdd)
 console.log(contract);
-
+const pinata = new PinataSDK({
+  pinataJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJhOGIyM2U0MS1kZTg3LTRhYWYtOTVmNC1mNDBmZWQ2NjJlNzQiLCJlbWFpbCI6Im5hbWFuYmFuc2FsMTAyQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI1OGQ1ODM1NWMwYTE2ZTc4MmEwOSIsInNjb3BlZEtleVNlY3JldCI6ImIxMjVkNGNkZGYyZmUzMTc4MWY0OTcyOGRiOTBlMzFmMjNkNTNmM2YzYTI3M2NiZTViZjY0Mjc1YjljYjFiYjIiLCJleHAiOjE3NjQ3NDEzNTR9.6dTuYSdS2GBexhtowWUM8r5h7UM4VoqoHdWEBPAe27o",
+  pinataGateway: "example-gateway.mypinata.cloud",
+});
 export default function AddHospital() {
   const [imageUrl, setImageUrl] = useState(null)
   const [formData, setFormData] = useState({
@@ -23,6 +26,7 @@ export default function AddHospital() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
+  const [imageFile, setImageFile] = useState("")
 
   const handleImageUpload = (event) => {
     const file = event.target.files?.[0]
@@ -30,6 +34,7 @@ export default function AddHospital() {
       const url = URL.createObjectURL(file)
       setImageUrl(url)
     }
+    setImageFile(file)
   }
 
   const handleInputChange = (event) => {
@@ -42,7 +47,7 @@ export default function AddHospital() {
     setIsLoading(true)
     setError(null)
     setSuccess(false)
-
+    const uploadFile = await pinata.upload.file(imageFile);
     if (typeof window.ethereum === 'undefined') {
       setError('Please install MetaMask or another Web3 provider to interact with the blockchain.')
       setIsLoading(false)
@@ -56,7 +61,7 @@ export default function AddHospital() {
       console.log("My user Address is:::"+userAddress);
       const res=await contract.methods.addHospital(
         formData.hospitalName,
-        imageUrl || '',
+        uploadFile.cid || '',
         formData.managerName,
         formData.contactPhone,
         formData.contactEmail

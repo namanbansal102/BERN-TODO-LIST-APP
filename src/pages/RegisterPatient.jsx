@@ -2,10 +2,14 @@
 
 import { useState } from 'react'
 import Web3 from 'web3';
-
+import { PinataSDK } from "pinata";
 const contractAdd = "0xdfa986440dfa2357bA1a63eb8F088f2C1b72a766";
 import ABI from "./ABI.json";
-
+import axios from 'axios';
+const pinata = new PinataSDK({
+  pinataJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJhOGIyM2U0MS1kZTg3LTRhYWYtOTVmNC1mNDBmZWQ2NjJlNzQiLCJlbWFpbCI6Im5hbWFuYmFuc2FsMTAyQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI1OGQ1ODM1NWMwYTE2ZTc4MmEwOSIsInNjb3BlZEtleVNlY3JldCI6ImIxMjVkNGNkZGYyZmUzMTc4MWY0OTcyOGRiOTBlMzFmMjNkNTNmM2YzYTI3M2NiZTViZjY0Mjc1YjljYjFiYjIiLCJleHAiOjE3NjQ3NDEzNTR9.6dTuYSdS2GBexhtowWUM8r5h7UM4VoqoHdWEBPAe27o",
+  pinataGateway: "example-gateway.mypinata.cloud",
+});
 export default function PatientRegistration() {
   const [patientImageUrl, setPatientImageUrl] = useState(null)
   const [documentUrl, setDocumentUrl] = useState(null)
@@ -18,7 +22,10 @@ export default function PatientRegistration() {
   const [documentValidity, setDocumentValidity] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-
+  const [imageArrayBuffer, setImageArrayBuffer] = useState(null);
+  const [fileArrayBuffer, setFileArrayBuffer] = useState(null);
+  const [fileCID, setFileCID] = useState("");
+  const [imageCID, setImageCID] = useState("")
   const handleImageUpload = async (event, setter) => {
     const file = event.target.files?.[0]
     if (file) {
@@ -27,22 +34,22 @@ export default function PatientRegistration() {
       
       // Convert image to byte string
       const arrayBuffer = await file.arrayBuffer();
+      setImageArrayBuffer(file);
       const byteArray = new Uint8Array(arrayBuffer);
       const byteString = Array.from(byteArray, (byte) => String.fromCharCode(byte)).join('');
-      
       // You can store this byteString in state if needed
       console.log("Image byte string:", byteString);
     }
   }
-
+  
   const handleDocumentUpload = async (event) => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[0];
+    const fileName=event.target.files?.[0].name;
     if (file) {
       const url = URL.createObjectURL(file)
-      setDocumentUrl(url)
-      
       // Convert document to byte string
       const arrayBuffer = await file.arrayBuffer();
+      setFileArrayBuffer(file)
       const byteArray = new Uint8Array(arrayBuffer);
       const byteString = Array.from(byteArray, (byte) => String.fromCharCode(byte)).join('');
       
@@ -50,12 +57,28 @@ export default function PatientRegistration() {
       console.log("Document byte string:", byteString);
     }
   }
+  const handleIPFSUpload=async()=>{
+    try {
+      
+      const uploadFile = await pinata.upload.file(fileArrayBuffer);
+      const uploadImage = await pinata.upload.file(imageArrayBuffer);
+      setFileCID(uploadFile.cid);
+      setImageCID(uploadImage.cid);
+      console.log("Hoorahy I am getting Upload as::::::",uploadFile);
+      return true;
+    } 
+    catch (error) {
+      console.log("Getting Error::::",error);
+      return false;
+    }
 
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     setError(null);
-  
+    const isUploaded=await handleIPFSUpload();
+    if(!isUploaded)return;
     try {
       if (typeof window.ethereum === 'undefined') {
         throw new Error('Please install MetaMask to use this feature');
@@ -79,8 +102,8 @@ export default function PatientRegistration() {
         metamaskAddress,
         `${checkupTimestamp}_${patientName}_${contactPhone}`,
         validityTimestamp,
-        documentUrl || '',
-        patientImageUrl || ''
+        fileCID || '',
+        imageCID || ''
       ).send({
         from: accounts[0],
         gasPrice: await web3.eth.getGasPrice(),
@@ -111,6 +134,7 @@ export default function PatientRegistration() {
 
   return (
     <div className="container mx-auto py-10 px-4">
+      <button onClick={handleIPFSUpload}>Click Me</button>
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl">
         <div className="p-6">
           <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">
@@ -313,4 +337,3 @@ export default function PatientRegistration() {
     </div>
   )
 }
-
