@@ -62,8 +62,8 @@ export default function AboutPage() {
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-center mb-2">Dr. Sarah Chen</h3>
-              <p className="text-emerald-400 text-center mb-4">Chief Medical Officer</p>
+              <h3 className="text-2xl font-bold text-center mb-2">Vidhi</h3>
+              <p className="text-emerald-400 text-center mb-4">Frontend Developer</p>
               <div className="flex justify-center gap-4 mb-4">
                 <a href="tel:+1234567890" className="text-gray-300 hover:text-emerald-400 transition-colors">
                   <Phone className="w-5 h-5" />
@@ -88,13 +88,13 @@ export default function AboutPage() {
             <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden">
                 <img
-                  src="/placeholder.svg"
+                  src="https://jade-added-egret-280.mypinata.cloud/files/bafkreia5enzsh6zc22i2t5leewlulli3jnmioxk7p4iccwkxpzkuiyydo4?X-Algorithm=PINATA1&X-Date=1733843540&X-Expires=30&X-Method=GET&X-Signature=812db8fd8a020b452802b754e227af26e6462a0a04ebfe60a41fffeffeccf2e4"
                   alt="Team Member 2"
                   fill
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-center mb-2">Alex Kumar</h3>
+              <h3 className="text-2xl font-bold text-center mb-2">Naman bansal</h3>
               <p className="text-blue-400 text-center mb-4">Lead Blockchain Developer</p>
               <div className="flex justify-center gap-4 mb-4">
                 <a href="tel:+1234567891" className="text-gray-300 hover:text-blue-400 transition-colors">
