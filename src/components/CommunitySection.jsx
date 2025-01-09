@@ -1,3 +1,6 @@
+import React, { useEffect }  from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 "use client"
 
 export default function CommunitySection() {
@@ -51,9 +54,15 @@ export default function CommunitySection() {
       content: "Wow, wow, wow, wow, wow, wow, Vite is..... Vite is.... Wow 🤩 🤯 🙏",
     },
   ]
+    useEffect(() => {
+      Aos.init({
+          duration: 1000,
+          once: true,
+      })
+  }, [])
 
   return (
-    <section className="bg-white py-14 ">
+    <section data-aos="flip-down" className="bg-white py-14 ">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by the community</h2>

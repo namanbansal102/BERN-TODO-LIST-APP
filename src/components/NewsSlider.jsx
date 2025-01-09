@@ -1,6 +1,8 @@
-
-import { useEffect, useState } from "react"
+import React, { useEffect }   from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useState } from "react";
 
 export default function NewsSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -47,9 +49,15 @@ export default function NewsSlider() {
 
     return () => clearInterval(timer)
   }, [])
+    useEffect(() => {
+      Aos.init({
+          duration: 1000,
+          once: true,
+      })
+  }, [])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 ">
+    <div data-aos="flip-right" className="max-w-7xl mx-auto px-4 ">
       <div className="space-y-4 mb-12">
         <h1 className="text-5xl font-bold">Latest news.</h1>
         <p className="text-xl text-gray-600">

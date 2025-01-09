@@ -1,6 +1,7 @@
-
 import { Github, Twitter, Linkedin, Mail, Phone, MapPin } from "lucide-react"
-
+import React, { useEffect }  from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 // Custom Input Component
 function CustomInput({ type = "text", placeholder, className = "", ...props }) {
   return (
@@ -48,7 +49,6 @@ export default function Footer() {
       icon: Github,
       href: "#",
     },
- 
     {
       name: "LinkedIn",
       icon: Linkedin,
@@ -57,14 +57,54 @@ export default function Footer() {
   ]
 
   const footerLinks = {
-    "Products & Services": ["MainNet", "TestNet", "Governance",],
-    "Developers": ["Documentation", "GitHub", "SDK", ],
-    "Company": ["About Us", "Careers"],
-   
+    "Products & Services": [
+      {
+        name: "MainNet",
+        href: "#",
+      },
+      {
+        name: "TestNet",
+        href: "#",
+      },
+      {
+        name: "Governance",
+        href: "#",
+      },
+    ],
+    "Developers": [
+      {
+        name: "Documentation",
+        href: "#",
+      },
+      {
+        name: "Github",
+        href: "#",
+      },
+      {
+        name: "SDK",
+        href: "#",
+      },
+    ],
+    "Company": [
+      {
+        name: "About Us",
+        href: "/about",
+      },
+      {
+        name: "Careers",
+        href: "#",
+      },
+    ],
   }
+    useEffect(() => {
+      Aos.init({
+          duration: 1000,
+          once: true,
+      })
+  }, [])
 
   return (
-    <footer className="w-full bg-white">
+    <footer data-aos="flip-down" className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo and Social Section */}
@@ -74,11 +114,9 @@ export default function Footer() {
               style={{
                 background: "linear-gradient(135deg, rgb(45, 206, 137) 0%, rgb(0, 147, 233) 100%)",
               }}
-              
-              >
-                NeoxLifeChain 
-
-              </div>
+            >
+              NeoxLifeChain
+            </div>
             <p className="text-gray-600 max-w-xs">
               Building the future of blockchain technology with Neo X ecosystem.
             </p>
@@ -102,9 +140,9 @@ export default function Footer() {
               <h3 className="text-sm font-semibold uppercase tracking-wider">{category}</h3>
               <ul className="space-y-4">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-gray-600 hover:text-emerald-400 transition-colors">
-                      {link}
+                  <li key={link.name}>
+                    <a href={link.href} className="text-gray-600 hover:text-emerald-400 transition-colors">
+                      {link.name}
                     </a>
                   </li>
                 ))}
@@ -141,11 +179,7 @@ export default function Footer() {
               <CustomInput type="email" placeholder="Email" required />
             </div>
             <CustomInput placeholder="Subject" required />
-            <CustomTextarea 
-              placeholder="Your message" 
-              className="min-h-[120px]" 
-              required 
-            />
+            <CustomTextarea placeholder="Your message" className="min-h-[120px]" required />
             <CustomButton
               style={{
                 background: "linear-gradient(135deg, rgb(45, 206, 137) 0%, rgb(0, 147, 233) 100%)",

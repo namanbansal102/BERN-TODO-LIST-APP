@@ -1,12 +1,30 @@
+import React, { useEffect }  from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
+import { Player } from "@lottiefiles/react-lottie-player";
+import lottieAnimation from "../assets/lottie.json"
 import AboutSection from "../components/AboutSection";
 import CommunitySection from "../components/CommunitySection";
 import HomeCardsDesign from "../components/HomeCardsDesign";
 import NewsSlider from "../components/NewsSlider";
 
+
 export default function Home() {
+  useEffect(() => {
+    Aos.init({
+        duration: 1000,
+        once: true,
+    })
+}, [])
     return (
 <>
-      <div className="w-full relative flex flex-col overflow-hidden lg:overflow-visible">
+<div
+  style={{
+    backgroundImage: `url("https://x.neo.org/assets/hero-x.png")`,
+  }}
+  data-aos="flip-up"
+  className="w-full relative flex flex-col overflow-hidden lg:overflow-visible"
+>
         {/* Main Content Section */}
         <div className="max-w-6xl mx-auto w-full py-20 lg:py-32 px-8 z-40">
           <div className="w-full lg:w-2/3 flex flex-col gap-8">
@@ -25,21 +43,7 @@ export default function Home() {
                   $20m in funding available now
                 </span>
                 </a>
-                <svg 
-                  width="6" 
-                  height="11" 
-                  viewBox="0 0 6 11" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    d="M0.957031 1.29688L5.09867 5.43852L0.957031 9.58016" 
-                    stroke="black" 
-                    strokeWidth="1.60248" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                </svg>
+ 
               </a>
             </div>
   
@@ -70,11 +74,12 @@ export default function Home() {
         <div className="mt-auto w-full hero-top-shadow h-1 z-50">&nbsp;</div>
   
         {/* Hero Image */}
-        <div className="absolute top-0 lg:right-0 -right-40 translate-x-1/2 lg:translate-x-0 lg:flex z-10">
-          <img 
-            src="https://x.neo.org/assets/hero-x.png" 
-            alt="Neo X Hero"
-            className="h-[740px] lg:h-[1065px]"
+        <div className="absolute mr-[5vw]  top-0 lg:right-0 -right-40 translate-x-1/2 lg:translate-x-0 lg:flex z-10">
+          <Player
+            autoplay
+            loop
+            src={lottieAnimation}
+            style={{width:"36vw" }}
           />
         </div>
   

@@ -1,4 +1,6 @@
-
+import React, { useEffect }  from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 export default function AboutSection() {
   const partners = [
     {
@@ -25,9 +27,14 @@ export default function AboutSection() {
       logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Cipla_logo.svg/2560px-Cipla_logo.svg.png",
     },
   ]
-
+  useEffect(() => {
+    Aos.init({
+        duration: 1000,
+        once: true,
+    })
+}, [])
   return (
-    <section className="bg-white py-24">
+    <section data-aos="fade-down-right" className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block">

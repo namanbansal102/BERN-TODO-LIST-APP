@@ -1,8 +1,19 @@
+import React, { useEffect }  from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 "use client"
 
 export default function HomeCardsDesign() {
+    useEffect(() => {
+      Aos.init({
+          duration: 1000,
+          once: true,
+      })
+  }, [])
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 bg-white">
+    <div   style={{
+      backgroundImage: `url("https://x.neo.org/assets/hero-x.png")`,
+    }} data-aos="slide-right" className="max-w-7xl mx-auto px-4 py-16 bg-white">
       <div className="space-y-4 mb-12">
         <h1 className="text-5xl font-bold">Resources.</h1>
         <p className="text-xl text-gray-600">
