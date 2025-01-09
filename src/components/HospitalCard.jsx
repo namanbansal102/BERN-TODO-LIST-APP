@@ -34,7 +34,7 @@ useEffect(() => {
 
   
   return (
-    <div className="p-8 bg-white">
+    <div  className="p-8 bg-white">
       <div className="max-w-sm mx-auto">
         <div 
           className="group relative rounded-2xl p-[2px] transition-all duration-300 hover:scale-105"

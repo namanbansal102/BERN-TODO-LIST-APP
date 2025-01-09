@@ -1,8 +1,9 @@
-import React, { useEffect }  from "react";
-import Aos from "aos";
-import 'aos/dist/aos.css'
 "use client"
 
+import React, { useEffect } from "react";
+import Aos from "aos";
+import 'aos/dist/aos.css'
+  
 export default function CommunitySection() {
   const testimonials = [
     {
@@ -54,50 +55,36 @@ export default function CommunitySection() {
       content: "Wow, wow, wow, wow, wow, wow, Vite is..... Vite is.... Wow 🤩 🤯 🙏",
     },
   ]
-    useEffect(() => {
-      Aos.init({
-          duration: 1000,
-          once: true,
-      })
+
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      once: true,
+    })
   }, [])
 
   return (
-    <section data-aos="flip-down" className="bg-white py-14 ">
+    <section  data-aos="fade-up" className="bg-black py-20">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by the community</h2>
-          <p className="text-xl text-gray-600">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#00ffcc] via-[#4d7fff] to-[#a64dff] text-transparent bg-clip-text">
+            Loved by the community
+          </h2>
+          <p className="text-xl text-gray-300">
             Don't take our word for it - listen to what Vite community members have to say.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-2xl p-6 hover:scale-105 transition-all duration-300  border-2 border-gray-50"
-              style={{
-                animation: `float ${3 + index * 0.2}s ease-in-out infinite`,
-              }}
+              className="group relative overflow-hidden rounded-2xl p-6 bg-zinc-900/50 hover:bg-zinc-800/50 transition-all duration-300 border border-zinc-800 hover:border-zinc-700"
             >
-              {/* Gradient background that shows on hover */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: "linear-gradient(135deg, rgb(45, 206, 137, 0.1) 0%, rgb(0, 147, 233, 0.1) 100%)",
-                }}
-              />
-              
-              {/* Content */}
               <div className="relative z-10">
                 <div className="flex items-center mb-4">
                   <div className="relative">
-                    <div
-                      className="w-12 h-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-emerald-400 transition-colors duration-300"
-                      style={{
-                        background: "linear-gradient(135deg, rgb(45, 206, 137) 0%, rgb(0, 147, 233) 100%)",
-                      }}
-                    >
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-zinc-700 transition-colors duration-300">
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
@@ -106,30 +93,27 @@ export default function CommunitySection() {
                     </div>
                   </div>
                   <div className="ml-3">
-                    <h3 className="font-semibold">{testimonial.name}</h3>
-                    <p className="text-sm text-gray-500">{testimonial.handle}</p>
+                    <h3 className="font-semibold text-white group-hover:text-[#00ffcc] transition-colors duration-300">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-sm text-gray-400">{testimonial.handle}</p>
                   </div>
                 </div>
-                <p className="text-gray-600">{testimonial.content}</p>
+                <p className="text-gray-300 group-hover:text-white transition-colors duration-300">
+                  {testimonial.content}
+                </p>
               </div>
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                style={{
+                  background: "linear-gradient(135deg, #00ffcc 0%, #4d7fff 50%, #a64dff 100%)",
+                }}
+              />
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        .animate-float {
-          animation: float ease-in-out infinite;
-        }
-      `}</style>
     </section>
   )
 }
+

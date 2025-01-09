@@ -57,7 +57,9 @@ export default function NewsSlider() {
   }, [])
 
   return (
-    <div data-aos="flip-right" className="max-w-7xl mx-auto px-4 ">
+    <div style={{
+      backgroundImage: `url("https://x.neo.org/assets/hero-x.png")`,
+    }} data-aos="flip-right" className="max-w-7xl mx-auto mt-[5vw] px-4 ">
       <div className="space-y-4 mb-12">
         <h1 className="text-5xl font-bold">Latest news.</h1>
         <p className="text-xl text-gray-600">
