@@ -36,7 +36,7 @@ export default function AboutSection() {
   return (
     <section style={{
       backgroundImage: `url("https://x.neo.org/assets/hero-x.png")`,
-    }} data-aos="fade-down-right" className="bg-white py-24">
+    }} data-aos="fade-down-right" className="bg-white mt-[10vh] py-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block">

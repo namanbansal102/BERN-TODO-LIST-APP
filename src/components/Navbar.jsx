@@ -36,8 +36,8 @@ export default function Component() {
   }
 
   return (
-    <nav className="border-b border-neutral-800 bg-black font-semibold">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <nav className="border-b border-neutral-800 h-[10vh] pt-[1vh] bg-black font-semibold">
+      <div className="mx-auto  px-4 sm:px-6 lg:px-8 ">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             {/* Logo */}
@@ -51,31 +51,7 @@ export default function Component() {
             </div>
 
             {/* Search bar */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-center space-x-2 rounded-md bg-neutral-900 px-3 py-1.5">
-                <svg
-                  className="h-4 w-4 text-neutral-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-                <input
-                  type="search"
-                  placeholder="Search"
-                  className="w-48 bg-transparent text-base text-neutral-200 placeholder-neutral-400 focus:outline-none"
-                />
-                <kbd className="hidden rounded border border-neutral-700 px-1.5 text-xs text-neutral-400 sm:block">
-                  Ctrl K
-                </kbd>
-              </div>
-            </div>
+      
           </div>
 
           {/* Desktop Navigation */}
