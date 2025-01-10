@@ -18,8 +18,7 @@ contract PRH {
         address u_address;
         uint userId;
         uint hId;
-    }
-    
+    } 
     struct record {
         uint rId;
         address u_add;

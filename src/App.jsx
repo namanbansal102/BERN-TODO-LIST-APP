@@ -9,6 +9,7 @@ import AddHospital from './pages/AddHospital'
 import PatientRegistration from './pages/RegisterPatient'
 import ViewHospital from './pages/ViewHospital'
 import AboutPage from './pages/About'
+import DemoVideo from './pages/DemoVideo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
         <Route path='/add-hospital' element={<AddHospital></AddHospital>}></Route>
         <Route path='/register-patient' element={<PatientRegistration></PatientRegistration>}></Route>
         <Route path='/about' element={<AboutPage></AboutPage>}></Route>
+        <Route path='/demoVideo' element={<DemoVideo></DemoVideo>}></Route>
       </Routes>
       
          </Router>
